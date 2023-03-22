@@ -13,10 +13,8 @@ void configureDependencies() {
   getIt.registerFactory(() => ArticlesCubit(articlesRepository: getIt()));
 
   // Repositories
-  // getIt.registerFactory(() => AuthorsRepository(remoteDataSource: getIt()));
   getIt.registerFactory(() => Repository(remoteDataSource: getIt()));
 
   // Data Sources
-  // getIt.registerFactory(() => AuthorsRemoteRetrofitDataSource(Dio()));
   getIt.registerFactory(() => RemoteRetrofitDataSource(Dio()));
 }
