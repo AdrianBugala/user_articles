@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:user_articles/features/home/page/home_page.dart';
 
+import 'app/injection_container.dart';
+
 void main() {
   runApp(const MyApp());
+  configureDependencies();
 }
 
 class MyApp extends StatelessWidget {
