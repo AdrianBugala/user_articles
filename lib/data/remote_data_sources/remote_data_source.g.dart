@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'articles_remote_data_source.dart';
+part of 'remote_data_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,9 +8,8 @@ part of 'articles_remote_data_source.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _ArticlesRemoteRetrofitDataSource
-    implements ArticlesRemoteRetrofitDataSource {
-  _ArticlesRemoteRetrofitDataSource(
+class _RemoteRetrofitDataSource implements RemoteRetrofitDataSource {
+  _RemoteRetrofitDataSource(
     this._dio, {
     this.baseUrl,
   }) {
@@ -42,6 +41,31 @@ class _ArticlesRemoteRetrofitDataSource
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     var value = _result.data!
         .map((dynamic i) => ArticleModel.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<AuthorModel>> getAuthors() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<AuthorModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => AuthorModel.fromJson(i as Map<String, dynamic>))
         .toList();
     return value;
   }
