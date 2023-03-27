@@ -1,20 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:user_articles/data/remote_data_sources/remote_data_source.dart';
-import 'package:user_articles/domain/repositories/repository.dart';
-import 'package:user_articles/features/articles/cubit/articles_cubit.dart';
-import 'package:user_articles/features/home/cubit/home_cubit.dart';
+import 'package:injectable/injectable.dart';
+import 'injection_container.config.dart';
 
 final getIt = GetIt.instance;
 
-void configureDependencies() {
-  // Bloc
-  getIt.registerFactory(() => HomeCubit(authorsRepository: getIt()));
-  getIt.registerFactory(() => ArticlesCubit(articlesRepository: getIt()));
+@InjectableInit(
+  initializerName: 'init', // default
+  preferRelativeImports: true, // default
+  asExtension: true, // default
+)
+void configureDependencies() => getIt.init();
 
-  // Repositories
-  getIt.registerFactory(() => Repository(remoteDataSource: getIt()));
+@module
+abstract class RegisterModule {
+  @Named("BaseUrl")
+  String get baseUrl =>
+      'https://my-json-server.typicode.com/adamsmaka/json-demo/';
 
-  // Data Sources
-  getIt.registerFactory(() => RemoteRetrofitDataSource(Dio()));
+  @lazySingleton
+  Dio dio(@Named('BaseUrl') String url) => Dio(BaseOptions(baseUrl: url));
 }
+ 
