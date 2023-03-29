@@ -5,11 +5,7 @@ import 'injection_container.config.dart';
 
 final getIt = GetIt.instance;
 
-@InjectableInit(
-  initializerName: 'init', // default
-  preferRelativeImports: true, // default
-  asExtension: true, // default
-)
+@InjectableInit()
 void configureDependencies() => getIt.init();
 
 @module
@@ -21,4 +17,3 @@ abstract class RegisterModule {
   @lazySingleton
   Dio dio(@Named('BaseUrl') String url) => Dio(BaseOptions(baseUrl: url));
 }
- 
